@@ -36,12 +36,13 @@
          * @param elem
          */
         createWrapper: function (elem) {
-            var $parent = elem.parentNode,
+            var index = document.body.getAttribute("data-index") || 0,
+                $parent = elem.parentNode,
                 html;
 
             this.$viewport = document.createElement("div");
             this.$viewport.className = "viewport " + this.setting.addClass;
-            this.$viewport.id = "J_ViewPort";
+            this.$viewport.id = "J_ViewPort" + index;
             this.$viewport.style.display = 'none';
             html = ['<div class="scrolltool J_scrollTool" style="display: none;">',
                 '<div class="scrolltrack">',
@@ -60,6 +61,8 @@
 
             this.$scrolltool = Util.getElem(this.$viewport, ".J_scrollTool");
             this.$scrollbar = Util.getElem(this.$viewport, ".J_scrollBar");
+
+            document.body.setAttribute("data-index", ++index);
         },
         /*更新滚动条的高度*/
         update: function () {
